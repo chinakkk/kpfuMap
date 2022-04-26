@@ -1,10 +1,50 @@
 body{
-    background-color: rgb(196, 243, 229);
+    background-color:rgb(192, 248, 229);
 
 }
-.test{
-    height: 100px;
-    width: 100px;
-    background-color:rgb(206, 102, 240);
+.allWay{
+    display: flex;
 
+}
+.way{
+    height: 500px;
+    width: 10px;
+    background-color:rgb(58, 127, 18);
+    margin-left: 30px;
+}
+#way1{
+    background-color:rgb(0, 255, 85);
+    
+    opacity: 1;
+
+}
+#way2{
+    background-color:rgb(3, 200, 69);
+    opacity: 1;
+
+}
+#way3{
+    background-color:rgb(3, 174, 60);
+    opacity: 1;
+
+}
+#way4{
+    background-color:rgb(1, 150, 50);
+    opacity: 1;
+
+}
+#way5{
+    background-color:rgb(2, 120, 41);
+    opacity: 1;
+
+}
+#btn{
+    padding: 50px;
+    padding-top: 16px;
+    padding-bottom: 70px;
+}
+#inputWay{
+    margin-left: 30px;
+    margin-top: 30px;
+    padding-right: 25px;
 }
