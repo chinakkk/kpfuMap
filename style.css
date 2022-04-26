@@ -9,35 +9,10 @@ body{
 .way{
     height: 500px;
     width: 10px;
-    background-color:rgb(58, 127, 18);
+    background-color:rgb(53, 124, 148);
     margin-left: 30px;
 }
-#way1{
-    background-color:rgb(0, 255, 85);
-    
-    opacity: 1;
 
-}
-#way2{
-    background-color:rgb(3, 200, 69);
-    opacity: 1;
-
-}
-#way3{
-    background-color:rgb(3, 174, 60);
-    opacity: 1;
-
-}
-#way4{
-    background-color:rgb(1, 150, 50);
-    opacity: 1;
-
-}
-#way5{
-    background-color:rgb(2, 120, 41);
-    opacity: 1;
-
-}
 #btn{
     padding: 50px;
     padding-top: 16px;
@@ -47,4 +22,10 @@ body{
     margin-left: 30px;
     margin-top: 30px;
     padding-right: 25px;
+}
+.invis{
+    opacity: 0.2;
+}
+.pic{
+    margin-left: 30px;
 }
