@@ -1,31 +1,15 @@
 body{
-    background-color:rgb(192, 248, 229);
+    background-color:rgb(121, 234, 196);
 
 }
-.allWay{
-    display: flex;
-
+canvas{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    
 }
-.way{
-    height: 500px;
-    width: 10px;
-    background-color:rgb(53, 124, 148);
-    margin-left: 30px;
-}
-
-#btn{
-    padding: 50px;
-    padding-top: 16px;
-    padding-bottom: 70px;
-}
-#inputWay{
-    margin-left: 30px;
-    margin-top: 30px;
-    padding-right: 25px;
-}
-.invis{
-    opacity: 0.2;
-}
-.pic{
-    margin-left: 30px;
+input{
+    display: block;
+    margin: 0 auto;
+    margin-top: 100px;
 }
