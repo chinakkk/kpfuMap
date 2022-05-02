@@ -2,11 +2,11 @@ const canvas=document.getElementById("canvasMap")
 const ctx=canvas.getContext("2d")
 
 
-var numWay;
-var space=32;
+var numWay;//номер который вводит пользователь в строку
+var space=32;//пробел
 
 var way=new Array()
-var way=[true,true,true,true,true,true,true]
+var way=[true,true,true,true,true,true,true]//тестовый массив для отключения прорисовки красных линий
 
 class Graph {
     constructor() {
@@ -179,6 +179,7 @@ class Graph {
 
 
 }
+//красные линии
 function drawRedLines(numWay){
 
     ctx.fillStyle="rgb(192, 248, 229)";
@@ -204,17 +205,21 @@ function drawRedLines(numWay){
     drawText("7",380,20)
 
 }
+//стереть красные линии
 function drawRedLineRestart(){
   for(let i=0;i<way.length;i++)
   {
       way[i]=true
   }
 }
+
+
+
+//прорисовка определенной верви
 function drawWayTree(finalNum){
 
   let arrayWay=new Array()
   arrayWay=graph.findShortestPath('1', finalNum)
-  
   canvasClear()
   for(var i=0;i<arrayWay.length;i++){
     if(arrayWay[i]==1){
@@ -273,6 +278,7 @@ function drawWayTree(finalNum){
   drawNumber()
   
 }
+//прорисовка всего терева
 function drawWayPic(){
   drawLine(10, 250,100, 250);
   drawLine(100, 250,100, 150)
@@ -288,6 +294,7 @@ function drawWayPic(){
   drawLine(200, 350,200, 300)
   drawLine(200, 300,250, 300)
 }
+//прорисовка цифр на дереве
 function drawNumber(){
 
   drawText("1",80,240)
@@ -304,34 +311,41 @@ function drawNumber(){
   drawText("12",180,290)
   drawText("13",230,290)
 }
+
+
+//прорисовка заднего фона
 function drawBackground(sizeOne=2000,sizeTwo=2000){
     ctx.fillStyle="rgb(192, 248, 229)";
     ctx.fillRect(0,0,sizeOne,sizeTwo);
 }
+//обнулить канвас 
 function canvasClear(){
   canvas.width = canvas.width;
 }
+//шаблон для текста
 function drawText(text,x,y,color="black"){
     ctx.fillStyle=color
     ctx.font="20px Arial";
     ctx.fillText(text,x,y);
 }
-function drawLine(xOne,yOne,xTwo,yTwo,width=5){
+//шаблон для линии
+function drawLine(xOne,yOne,xTwo,yTwo,width=2,color='black'){
     ctx.lineWidth = width; 
     ctx.moveTo(xOne, yOne); 
     ctx.lineTo(xTwo, yTwo); 
+    ctx.strokeStyle = color;
     ctx.stroke();
 }
+//////////////////нажатие
 document.addEventListener("keydown",pressKey)
 function pressKey(event){
   if(event.keyCode==space){
     numWay=Number(document.getElementById('inputWay').value)
     document.getElementById('inputWay').value=''
-    // draw(numWay-1)
     if(numWay!=1)drawWayTree(numWay)
-    else {
+    else if(numWay==1){
       canvasClear()
-      drawLine(10, 250,100, 250,5);
+      drawLine(10, 250,100, 250);
       drawNumber()
     }
   }
@@ -367,6 +381,10 @@ graph.addEdge('10', '11');
 
 drawWayPic()
 drawNumber()
+
+
+
+
 
 
 
