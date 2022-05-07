@@ -1,5 +1,7 @@
 body{
     background-color:rgb(121, 234, 196);
+    background-color:#99b0f6;
+    background-color:#2d324a;
 
     zoom: 75%;
 
@@ -10,6 +12,7 @@ body{
 canvas{
     display: block;
     margin: 0 auto;
+    margin-top: 100px;
     
 }
 input{
@@ -18,5 +21,5 @@ input{
     margin-top: 100px;
 }
 #space{
-    margin-bottom: 200px;
+    /* margin-bottom: 50px; */
 }

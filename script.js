@@ -3,19 +3,42 @@ const ctx=canvas.getContext("2d")
 
 
 const backgroundMap=new Image();
-// backgroundMap.src="/jpegForm.jpg"
-backgroundMap.src="map.gif"
+backgroundMap.src="background/dark.png"//1873  x  617
+
 
 var numWay=0;//номер который вводит пользователь в строку
 var space=32;//пробел
 var z=90;
+var leftArrow=37;
+var upArrow=38;
+var rightArrow=39;
+var downArrow=40;
+var i=73;
+var j=74;
+var k=75;
+var l=76;
+var downStep=221
+var upStep=219
+var p=80
+
+var wayColor='#99b0f6'
+
+
+var text={
+  x:0,
+  y:0,
+};
+
 var pi=Math.PI
 
-var way={
-  x:920,
+var wayFirst={
+  x:935,
   y:580,
 };
-//489
+var way={
+  x:wayFirst.x,
+  y:wayFirst.y,
+};
 
 class Graph {
     constructor() {
@@ -196,7 +219,7 @@ function drawBackground(sizeOne=canvas.height,sizeTwo=canvas.width){
     ctx.fillRect(0,0,sizeOne,sizeTwo);
 }
 function drawMap(){
-  ctx.drawImage(backgroundMap,0,0,backgroundMap.width*0.95,backgroundMap.height*0.95)
+  ctx.drawImage(backgroundMap,30,30,backgroundMap.width*0.95,backgroundMap.height*0.95)
 }
 //обнулить канвас 
 function canvasClear(){
@@ -205,24 +228,23 @@ function canvasClear(){
 //шаблон для текста
 function drawText(text,x,y,color="black"){
     ctx.fillStyle=color
-    ctx.font="20px Arial";
+    ctx.font="10px Arial";
     ctx.fillText(text,x,y);
 }
 //шаблон для линии
-function drawLine(xOne,yOne,xTwo,yTwo,width=0.1,color='rgb(121, 234, 196)'){
+function drawLine(xOne,yOne,xTwo,yTwo,width=0.1,color=wayColor){
     ctx.lineWidth = width; 
     ctx.moveTo(xOne, yOne); 
     ctx.lineTo(xTwo, yTwo); 
     ctx.strokeStyle = color;
     ctx.stroke();
 }
-function drawCircle(x=way.x,y=way.y,radius=4,start=0,finish=pi*2,watch=true,color='rgb(121, 234, 196)'){
+function drawCircle(x=way.x,y=way.y,radius=4,start=0,finish=pi*2,watch=true,color=wayColor){
   // ctx.lineWidth=width
   ctx.strokeStyle=color
   ctx.arc(x,y,radius,start,finish,watch)
-  ctx.stroke()
 }
-function drawRect(x=way.x,y=way.y,sizeOne=10,sizeTwo=10,color='rgb(121, 234, 196)'){
+function drawRect(x=way.x,y=way.y,sizeOne=10,sizeTwo=10,color=wayColor){
   ctx.fillStyle=color
   ctx.fillRect(x ,y,sizeOne,sizeTwo)
 }
@@ -283,24 +305,23 @@ function searchRoom(finalNum){
 
   canvasClear()
   drawMap()
-  
+  drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
   let arrayWay=new Array()
   arrayWay=graph.findShortestPath('0', finalNum)
-  console.log(arrayWay)
   for(var i=0;i<arrayWay.length;i++){
-    if(arrayWay[i]==1)upWay(86)
-    if(arrayWay[i]==2)rightWay(83)
-    if(arrayWay[i]==3)rightWay(45)
-    if(arrayWay[i]==4)rightWay(45)
-    if(arrayWay[i]==5)drawLine()
-    if(arrayWay[i]==6)drawLine()
-    if(arrayWay[i]==7)drawLine()
-    if(arrayWay[i]==8)drawLine()
-    if(arrayWay[i]==9)drawLine()
-    if(arrayWay[i]==10)drawLine()
-    if(arrayWay[i]==11)drawLine()
-    if(arrayWay[i]==12)drawLine()
-    if(arrayWay[i]==14)drawLine()
+    if(arrayWay[i]==1)upWay(76)
+    if(arrayWay[i]==2)rightWay(75)
+    if(arrayWay[i]==3)rightWay(8)
+    if(arrayWay[i]==4)rightWay(44)
+    if(arrayWay[i]==5)rightWay(46)
+    if(arrayWay[i]==6)rightWay(46)
+    if(arrayWay[i]==7)rightWay(45)
+    if(arrayWay[i]==8)rightWay(36)
+    if(arrayWay[i]==9)rightWay(25)
+    if(arrayWay[i]==10)rightWay(105)
+    if(arrayWay[i]==11)rightWay(77)
+    if(arrayWay[i]==12)rightWay(2)
+    if(arrayWay[i]==13)rightWay(40)
     if(arrayWay[i]==14)drawLine()
     if(arrayWay[i]==15)drawLine()
     if(arrayWay[i]==16)drawLine()
@@ -314,41 +335,57 @@ function searchRoom(finalNum){
     if(arrayWay[i]==24)drawLine()
 
     if(arrayWay[i]==129)upWay(10)
-    if(arrayWay[i]==130)upWay(10)
+    if(arrayWay[i]==130)downWay(10)
     if(arrayWay[i]==131)upWay(10)
-    if(arrayWay[i]==132)upWay(10)
+    if(arrayWay[i]==132)downWay(10)
     if(arrayWay[i]==133)upWay(10)
-    if(arrayWay[i]==134)upWay(10)
+    if(arrayWay[i]==134)downWay(10)
     if(arrayWay[i]==135)upWay(10)
-    if(arrayWay[i]==136)upWay(10)
+    if(arrayWay[i]==136)downWay(10)
     if(arrayWay[i]==137)upWay(10)
-    if(arrayWay[i]==138)drawLine();
-    if(arrayWay[i]==139)drawLine();
-    if(arrayWay[i]==140)drawLine();
-    if(arrayWay[i]==141)drawLine();
-    if(arrayWay[i]==142)drawLine();
-    if(arrayWay[i]==143)drawLine();
-    if(arrayWay[i]==144)drawLine();
-    if(arrayWay[i]==145)drawLine();
-    if(arrayWay[i]==146)drawLine();
-    if(arrayWay[i]==147)drawLine();
-    if(arrayWay[i]==148)drawLine();
-    if(arrayWay[i]==149)drawLine();
-    if(arrayWay[i]==150)drawLine();
-    if(arrayWay[i]==151)drawLine();
-    if(arrayWay[i]==152)drawLine();
-    if(arrayWay[i]==153)drawLine();
-    if(arrayWay[i]==154)drawLine();
-    if(arrayWay[i]==155)drawLine();
-    if(arrayWay[i]==156)drawLine();
-    if(arrayWay[i]==157)drawLine();
-    if(arrayWay[i]==158)drawLine();
-    if(arrayWay[i]==159)drawLine();
+    if(arrayWay[i]==138)downWay(10)
+    if(arrayWay[i]==139){downWay(45)}
+    if(arrayWay[i]==140){downWay(45)}
+    if(arrayWay[i]==141){upWay(10)}
+    //if(arrayWay[i]==142){}
+    if(arrayWay[i]==143){upWay(10)}//1
+    if(arrayWay[i]==144){upWay(10)}
+    if(arrayWay[i]==145){upWay(10)}//2
+    if(arrayWay[i]==146){downWay(45)}
+    if(arrayWay[i]==147){downWay(10)}//1
+    if(arrayWay[i]==148){downWay(10)}
+    if(arrayWay[i]==149){downWay(10)}//2
+    if(arrayWay[i]==150){downWay(10)}
+    if(arrayWay[i]==151){downWay(10)}
+    if(arrayWay[i]==152){downWay(10)}
+    if(arrayWay[i]==153){upWay(20)}
+    if(arrayWay[i]==154){}
+    if(arrayWay[i]==155){}
+    if(arrayWay[i]==156){}
+    if(arrayWay[i]==157){}
+    if(arrayWay[i]==158){}
+    if(arrayWay[i]==159){}
 
     
   }
+  drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в конце линии
+  way.x=wayFirst.x
+  way.y=wayFirst.y
+  ctx.stroke()
 }
 
+function restartMap(){
+  canvasClear()
+  drawMap()
+  way.x=wayFirst.x
+  way.y=wayFirst.y
+  text.x=0
+  text.y=0
+  step=5
+
+}
+
+var step=5;
 
 //нажатие
 document.addEventListener("keydown",pressKey)
@@ -361,9 +398,50 @@ function pressKey(event){
     }
   }
   if(event.keyCode==z){
-    drawSetka()
+    restartMap()
   }
-  searchRoom(135)
+  if(event.keyCode==i){
+    
+    upWay(step)
+    text.y+=step
+    console.log("Y="+text.y)
+    ctx.stroke()
+  }
+  if(event.keyCode==k){
+    downWay(step)
+    text.y-=step
+    console.log("Y="+text.y)
+    ctx.stroke()
+  }
+  if(event.keyCode==j){
+    leftWay(step)
+    text.x-=step
+    console.log("X="+text.x)
+    ctx.stroke()
+  }
+  if(event.keyCode==l){
+    rightWay(step)
+    text.x+=step
+    console.log("X="+text.x)
+    ctx.stroke()
+  }
+  if(event.keyCode==upStep){
+    step--
+    console.log("шаг "+step)
+  }
+  if(event.keyCode==downStep){
+    step++
+    console.log("шаг "+step)
+  }
+  if(event.keyCode==p){
+    text.x=0
+    text.y=0
+    
+    canvasClear()
+    drawMap()
+    drawCircle()
+  }
+
 } 
 
 
@@ -385,6 +463,15 @@ graph.addVertex('12');
 graph.addVertex('13');
 graph.addVertex('14');
 graph.addVertex('15');
+graph.addVertex('16');
+graph.addVertex('17');
+graph.addVertex('18');
+graph.addVertex('19');
+graph.addVertex('20');
+graph.addVertex('21');
+graph.addVertex('22');
+graph.addVertex('23');
+graph.addVertex('24');
 
 //аудитории
 graph.addVertex('129');
@@ -418,6 +505,9 @@ graph.addVertex('156');
 graph.addVertex('157');
 graph.addVertex('158');
 graph.addVertex('159');
+graph.addVertex('160');
+graph.addVertex('161');
+graph.addVertex('162');
 
 //путь
 graph.addEdge('0', '1');
@@ -435,43 +525,55 @@ graph.addEdge('11', '12');
 graph.addEdge('12', '13');
 graph.addEdge('13', '14');
 graph.addEdge('14', '15');
+graph.addEdge('15', '16');
+graph.addEdge('16', '17');
+graph.addEdge('17', '18');
+graph.addEdge('18', '19');
+graph.addEdge('19', '20');
+graph.addEdge('20', '21');
+graph.addEdge('21', '22');
+graph.addEdge('22', '23');
 
 //путь к аудиториям
-graph.addEdge('2', '129');
+graph.addEdge('3', '129');
 graph.addEdge('2', '130');
-graph.addEdge('3', '131');
-graph.addEdge('3', '132');
-graph.addEdge('4', '133');
-graph.addEdge('4', '134');
-graph.addEdge('5', '135');
-graph.addEdge('5', '136');
-graph.addEdge('6', '137');
-graph.addEdge('6', '138');
-graph.addEdge('7', '139');
+graph.addEdge('4', '131');
+graph.addEdge('4', '132');
+graph.addEdge('5', '133');
+graph.addEdge('5', '134');
+graph.addEdge('6', '135');
+graph.addEdge('6', '136');
+graph.addEdge('7', '137');
+graph.addEdge('7', '138');
+graph.addEdge('8', '139');
 graph.addEdge('8', '140');
-graph.addEdge('8', '141');
+graph.addEdge('9', '141');
 graph.addEdge('8', '146');
-graph.addEdge('9', '143');
-graph.addEdge('9', '144');
-graph.addEdge('9', '145');
-graph.addEdge('9', '147');
-graph.addEdge('9', '148');
-graph.addEdge('9', '149');
-graph.addEdge('10', '153');
-graph.addEdge('10', '150');
-graph.addEdge('11', '151');
-graph.addEdge('11', '152');
-graph.addEdge('12', '154');
-graph.addEdge('13', '155');
-graph.addEdge('14', '157');
-graph.addEdge('15', '158');
+graph.addEdge('10', '143');
+graph.addEdge('10', '144');
+graph.addEdge('10', '145');
+graph.addEdge('10', '147');
+graph.addEdge('10', '148');
+graph.addEdge('10', '149');
+graph.addEdge('11', '153');
+graph.addEdge('12', '150');
+graph.addEdge('13', '151');
+graph.addEdge('13', '152');
+graph.addEdge('14', '154');
+graph.addEdge('15', '155');
+graph.addEdge('16', '156');
+graph.addEdge('17', '157');
+graph.addEdge('18', '158');
+graph.addEdge('19', '159');
+graph.addEdge('20', '160');
+graph.addEdge('21', '161');
+graph.addEdge('22', '162');
 
 
 // document.addEventListener("DOMContentLoaded", function(){
 // })
 
 backgroundMap.onload=drawMap
-
 
 
 
