@@ -1,12 +1,156 @@
 body{
     background-color:rgb(121, 234, 196);
     background-color:#99b0f6;
+    background-color:#2d81c1;
     background-color:#2d324a;
 
+    background-image: url(/background1.jpg);
+    /* background-image: url(/background.jpg); */
     zoom: 75%;
+
+    margin: 0;
+	font-family: Arial;
+    font-family: 'Raleway', sans-serif;
+	font-size: 22px;
+	-webkit-font-smoothing:antialiased;/*Сглаживает шрифты*/
 
     
 }
+*,
+*:before,
+*:after{
+	box-sizing: border-box;/*Какая то херня что бы отступы не увеличивали размер*/
+}
+
+.container{
+	width: 100%;	   /*Ширина 100% экрана*/
+	max-width: 90%; /*Максимальная ширина контейнера*/
+	margin: 0 auto;	   /*Выравниваем по центру*/
+	padding: 0 15px;
+
+}
+
+.header{
+    background-color: #48507b;
+	width: 100%;
+	position: absolute;/*Тип второй слой в фотошопе(поверх всего)*/
+	top: 0;
+	left: 0;
+	z-index: 1000;/*Тип какой слой*/
+	max-height: 100%;
+}
+.header_inner{
+    height: 100px;
+    width: 100%;
+	display: flex; /*Расставить элементы селектора в строку*/
+	justify-content: space-between; /*Промежуток между элементами хз там ес че*/
+	padding: auto 0;
+	align-items: center;/*Все элементы в центре*/
+    justify-content: space-between;
+
+}
+
+.header_logo{
+    font-weight: 700;
+    font-size: 25px;
+    padding-left: 8px;
+    color: white;
+    opacity: .85;
+    display: flex;
+}
+#search{
+    font-weight: 300;
+}
+#kpfu{
+    font-weight: 550;
+}
+
+.nav{
+	font-size: 18px;
+	font-weight: 700;
+	text-transform: uppercase;/*Увеличивает буквы из а в А*/
+	display: flex;
+}
+
+	
+.nav_link{
+	margin-left: 50px;
+	text-decoration: none;/*Убираем линию под текстом*/
+	opacity: .85;
+	transition: opacity .2s linear;/*Трансформация, с каким объектом работаем*/
+	color: white;
+}
+
+.nav_link:hover{/*Что то тип трансформация при наводке*/
+	opacity: 1;
+}
+
+.nav_link:first-child{/*У первого элемента убираем отступ*/
+	margin-left: 0;
+
+}
+
+
+
+
+
+
+.intro{
+	color: #fff;
+	display: flex;
+	flex-direction: column;/*каждый новый элемент на новой строке*/
+	justify-content: center;
+
+	height: 1200px;
+	background: #2d324a;
+	padding-top: 100px;
+
+}
+.intro_inner{
+    font-family: 'Raleway', sans-serif;
+    font-size: 100px;
+    font-weight: 800;
+	max-width: 2000px;
+    margin: 0 auto;
+	text-align: left;
+    margin-bottom: 300px;
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+
+.intro_title{
+	margin: 0 0 30px;
+	font-family: 'Open Sans', sans-serif;
+	text-transform: uppercase;
+	font-size: 65px;
+	line-height: 1.1;/*Рассотяние меж строк 1.1 это 65*1.1*/
+	font-weight: 700;
+	color: white;
+}
+
+.intro_suptitle{
+	font-family: 'Raleway', sans-serif;
+	font-size: 22px;
+	line-height: 1.5;
+	font-weight: 400;
+	color: white;
+}
+.map_inner{
+    max-width: 100%;
+}
+
+.gif{
+    margin-right: 100px;
+}
+
+
+
+
+
+
+
 
 
 canvas{
@@ -19,7 +163,16 @@ input{
     display: block;
     margin: 0 auto;
     margin-top: 100px;
+    margin-bottom: 200px;
 }
-#space{
-    /* margin-bottom: 50px; */
+/* #text{
+    color: #f7f5e9;
+    font-size: 80px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: -3px;
+} */
+
+
+.space{
+    margin-bottom: 200px;
 }
