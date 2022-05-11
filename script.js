@@ -23,6 +23,7 @@ var downStep=221
 var upStep=219
 var pKey=80
 var rightArrowKey=39
+var enterKey=13
 
 var toggleWayLine= true
 
@@ -315,214 +316,217 @@ function addEdgeGraph(start,finish){
 }
 
 function searchRoom(finalNum){
+  
 
-  canvasClear()
-  drawMap()
-  drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
-  let arrayWay=new Array()
-  arrayWay=graph.findShortestPath(0, finalNum)
-  console.log(arrayWay)
-  for(var i=0;i<arrayWay.length;i++){
-    if(arrayWay[i]==1)upWay(93)
-    if(arrayWay[i]==2)rightWay(75)
-    if(arrayWay[i]==3)rightWay(8)
-    if(arrayWay[i]==4)rightWay(44)
-    if(arrayWay[i]==5)rightWay(46)
-    if(arrayWay[i]==6)rightWay(46)
-    if(arrayWay[i]==7)rightWay(45)
-    if(arrayWay[i]==8)rightWay(36)
-    if(arrayWay[i]==9)rightWay(25)
+  if(finalNum>=101){
+    canvasClear()
+    drawMap()
+    drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
+    let arrayWay=new Array()
+    arrayWay=graph.findShortestPath(0, finalNum)
+    console.log(arrayWay)
+    for(var i=0;i<arrayWay.length;i++){
+      if(arrayWay[i]==1)upWay(93)
+      if(arrayWay[i]==2)rightWay(75)
+      if(arrayWay[i]==3)rightWay(8)
+      if(arrayWay[i]==4)rightWay(44)
+      if(arrayWay[i]==5)rightWay(46)
+      if(arrayWay[i]==6)rightWay(46)
+      if(arrayWay[i]==7)rightWay(45)
+      if(arrayWay[i]==8)rightWay(36)
+      if(arrayWay[i]==9)rightWay(25)
 
-    if(arrayWay[i]==10)rightWay(105)
-    if(arrayWay[i]==11)rightWay(77)
-    if(arrayWay[i]==12)rightWay(2)
-    if(arrayWay[i]==13)rightWay(40)
-    if(arrayWay[i]==14){rightWay(2);upWay(39)}
-    if(arrayWay[i]==15)upWay(37)
-    if(arrayWay[i]==16)upWay(16)
-    if(arrayWay[i]==17){leftWay(7);upWay(72)}
-    if(arrayWay[i]==18)upWay(33)
-    if(arrayWay[i]==19)upWay(34)
+      if(arrayWay[i]==10)rightWay(105)
+      if(arrayWay[i]==11)rightWay(77)
+      if(arrayWay[i]==12)rightWay(2)
+      if(arrayWay[i]==13)rightWay(40)
+      if(arrayWay[i]==14){rightWay(2);upWay(39)}
+      if(arrayWay[i]==15)upWay(37)
+      if(arrayWay[i]==16)upWay(16)
+      if(arrayWay[i]==17){leftWay(7);upWay(72)}
+      if(arrayWay[i]==18)upWay(33)
+      if(arrayWay[i]==19)upWay(34)
 
-    if(arrayWay[i]==20)upWay(34)
-    if(arrayWay[i]==21)upWay(35)
-    if(arrayWay[i]==22)upWay(34)
-    if(arrayWay[i]==23)upWay(40)
-    if(arrayWay[i]==24)rightWay(62)
-    if(arrayWay[i]==25)rightWay(60)
-    if(arrayWay[i]==26)rightWay(42)
-    if(arrayWay[i]==27)rightWay(45)
-    if(arrayWay[i]==28)rightWay(44)
-    if(arrayWay[i]==29)rightWay(45)
+      if(arrayWay[i]==20)upWay(34)
+      if(arrayWay[i]==21)upWay(35)
+      if(arrayWay[i]==22)upWay(34)
+      if(arrayWay[i]==23)upWay(40)
+      if(arrayWay[i]==24)rightWay(62)
+      if(arrayWay[i]==25)rightWay(60)
+      if(arrayWay[i]==26)rightWay(42)
+      if(arrayWay[i]==27)rightWay(45)
+      if(arrayWay[i]==28)rightWay(44)
+      if(arrayWay[i]==29)rightWay(45)
 
-    if(arrayWay[i]==30){leftWay(102);upWay(34)}
-    if(arrayWay[i]==31)leftWay(33)
-    if(arrayWay[i]==32)upWay(180)
-    if(arrayWay[i]==33)rightWay(46)
-    if(arrayWay[i]==34)rightWay(5)
-    if(arrayWay[i]==35)rightWay(32)
-    if(arrayWay[i]==36)leftWay(39)
-    if(arrayWay[i]==37)leftWay(9)
-    if(arrayWay[i]==38)leftWay(26)
-    if(arrayWay[i]==39){upWay(2);leftWay(75)}
+      if(arrayWay[i]==30){leftWay(102);upWay(34)}
+      if(arrayWay[i]==31)leftWay(33)
+      if(arrayWay[i]==32)upWay(180)
+      if(arrayWay[i]==33)rightWay(46)
+      if(arrayWay[i]==34)rightWay(5)
+      if(arrayWay[i]==35)rightWay(32)
+      if(arrayWay[i]==36)leftWay(39)
+      if(arrayWay[i]==37)leftWay(9)
+      if(arrayWay[i]==38)leftWay(26)
+      if(arrayWay[i]==39){upWay(2);leftWay(75)}
 
-    if(arrayWay[i]==40)leftWay(9)
-    if(arrayWay[i]==41)leftWay(47)
-    if(arrayWay[i]==42)leftWay(1)
-    if(arrayWay[i]==43)leftWay(44)
-    if(arrayWay[i]==44)leftWay(1)
-    if(arrayWay[i]==45)leftWay(44)
-    if(arrayWay[i]==46)leftWay(47)
-    if(arrayWay[i]==47)leftWay(11)
-    if(arrayWay[i]==48)leftWay(49)
-    if(arrayWay[i]==49)leftWay(39)
+      if(arrayWay[i]==40)leftWay(9)
+      if(arrayWay[i]==41)leftWay(47)
+      if(arrayWay[i]==42)leftWay(1)
+      if(arrayWay[i]==43)leftWay(44)
+      if(arrayWay[i]==44)leftWay(1)
+      if(arrayWay[i]==45)leftWay(44)
+      if(arrayWay[i]==46)leftWay(47)
+      if(arrayWay[i]==47)leftWay(11)
+      if(arrayWay[i]==48)leftWay(49)
+      if(arrayWay[i]==49)leftWay(39)
 
-    if(arrayWay[i]==50)leftWay(8)
-    if(arrayWay[i]==51)leftWay(33)
-    if(arrayWay[i]==52)leftWay(17)
-    if(arrayWay[i]==53)leftWay(20)
-    if(arrayWay[i]==54)leftWay(39)
-    if(arrayWay[i]==55)leftWay(19)
-    if(arrayWay[i]==56)leftWay(36)
-    if(arrayWay[i]==57)leftWay(18)
-    if(arrayWay[i]==58)leftWay(30)
-    if(arrayWay[i]==59)downWay(36)
+      if(arrayWay[i]==50)leftWay(8)
+      if(arrayWay[i]==51)leftWay(33)
+      if(arrayWay[i]==52)leftWay(17)
+      if(arrayWay[i]==53)leftWay(20)
+      if(arrayWay[i]==54)leftWay(39)
+      if(arrayWay[i]==55)leftWay(19)
+      if(arrayWay[i]==56)leftWay(36)
+      if(arrayWay[i]==57)leftWay(18)
+      if(arrayWay[i]==58)leftWay(30)
+      if(arrayWay[i]==59)downWay(36)
 
-    if(arrayWay[i]==60){leftWay();upWay(45)}
-    if(arrayWay[i]==61)upWay(48)
-    if(arrayWay[i]==62)upWay(76)
-    if(arrayWay[i]==63)upWay(45)
-    if(arrayWay[i]==64)upWay(30)
-    if(arrayWay[i]==65)upWay(11)
-    if(arrayWay[i]==66)upWay(16)
-    if(arrayWay[i]==67)upWay(102)
-    if(arrayWay[i]==68){upWay(24);rightWay(40)}
-    if(arrayWay[i]==69)rightWay(6)
+      if(arrayWay[i]==60){leftWay();upWay(45)}
+      if(arrayWay[i]==61)upWay(48)
+      if(arrayWay[i]==62)upWay(76)
+      if(arrayWay[i]==63)upWay(45)
+      if(arrayWay[i]==64)upWay(30)
+      if(arrayWay[i]==65)upWay(11)
+      if(arrayWay[i]==66)upWay(16)
+      if(arrayWay[i]==67)upWay(102)
+      if(arrayWay[i]==68){upWay(24);rightWay(40)}
+      if(arrayWay[i]==69)rightWay(6)
 
-    if(arrayWay[i]==70)rightWay(40)
-    if(arrayWay[i]==71)rightWay(37)
-    if(arrayWay[i]==72)rightWay(16)
-    if(arrayWay[i]==73)leftWay(28)
-    if(arrayWay[i]==74){leftWay(12);downWay(7);leftWay(22)}
-    if(arrayWay[i]==75){leftWay(48)}
-    
+      if(arrayWay[i]==70)rightWay(40)
+      if(arrayWay[i]==71)rightWay(37)
+      if(arrayWay[i]==72)rightWay(16)
+      if(arrayWay[i]==73)leftWay(28)
+      if(arrayWay[i]==74){leftWay(12);downWay(7);leftWay(22)}
+      if(arrayWay[i]==75){leftWay(48)}
+      
 
-//аудитории
+  //аудитории
 
-    if(arrayWay[i]=='101а')downWay(8)
-    if(arrayWay[i]=='102а')downWay(8)
-    if(arrayWay[i]=='103а')downWay(8)
-    if(arrayWay[i]=='104а')leftWay(8)
-    if(arrayWay[i]=='105а')leftWay(8)
-    if(arrayWay[i]=='106а')upWay(8)
-    if(arrayWay[i]=='107а')upWay(8)
-    if(arrayWay[i]=='108а')upWay(8)
-    if(arrayWay[i]=='109а')upWay(8)
-    if(arrayWay[i]=='110а')upWay(8)
-    if(arrayWay[i]=='111а')rightWay(7)
-    if(arrayWay[i]=='112а')downWay(8)
-    if(arrayWay[i]=='113а')downWay(8)
+      if(arrayWay[i]=='101а')downWay(8)
+      if(arrayWay[i]=='102а')downWay(8)
+      if(arrayWay[i]=='103а')downWay(8)
+      if(arrayWay[i]=='104а')leftWay(8)
+      if(arrayWay[i]=='105а')leftWay(8)
+      if(arrayWay[i]=='106а')upWay(8)
+      if(arrayWay[i]=='107а')upWay(8)
+      if(arrayWay[i]=='108а')upWay(8)
+      if(arrayWay[i]=='109а')upWay(8)
+      if(arrayWay[i]=='110а')upWay(8)
+      if(arrayWay[i]=='111а')rightWay(7)
+      if(arrayWay[i]=='112а')downWay(8)
+      if(arrayWay[i]=='113а')downWay(8)
 
-    if(arrayWay[i]=='101в')upWay(8)
-    if(arrayWay[i]=='102в')downWay(8)
-    if(arrayWay[i]=='103в')upWay(8)
-    if(arrayWay[i]=='104в')downWay(8)
-    if(arrayWay[i]=='105в')upWay(8)
-    if(arrayWay[i]=='106в')downWay(8)
-    if(arrayWay[i]=='107в')upWay(32)
-    if(arrayWay[i]=='108в'){leftWay(3);upWay(9)}
-    if(arrayWay[i]=='109в')upWay(9)
-    if(arrayWay[i]=='110в')leftWay(16)
-    if(arrayWay[i]=='111в')downWay(35)
-    if(arrayWay[i]=='112в')leftWay(16)
-    if(arrayWay[i]=='113в')rightWay(13)
-    if(arrayWay[i]=='114в')leftWay(16)
-    if(arrayWay[i]=='115в')rightWay(13)
-    if(arrayWay[i]=='116в')leftWay(16)
-    if(arrayWay[i]=='117в')rightWay(13)
-    if(arrayWay[i]=='118в')leftWay(16)
-    if(arrayWay[i]=='119в')downWay(8)
+      if(arrayWay[i]=='101в')upWay(8)
+      if(arrayWay[i]=='102в')downWay(8)
+      if(arrayWay[i]=='103в')upWay(8)
+      if(arrayWay[i]=='104в')downWay(8)
+      if(arrayWay[i]=='105в')upWay(8)
+      if(arrayWay[i]=='106в')downWay(8)
+      if(arrayWay[i]=='107в')upWay(32)
+      if(arrayWay[i]=='108в'){leftWay(3);upWay(9)}
+      if(arrayWay[i]=='109в')upWay(9)
+      if(arrayWay[i]=='110в')leftWay(16)
+      if(arrayWay[i]=='111в')downWay(35)
+      if(arrayWay[i]=='112в')leftWay(16)
+      if(arrayWay[i]=='113в')rightWay(13)
+      if(arrayWay[i]=='114в')leftWay(16)
+      if(arrayWay[i]=='115в')rightWay(13)
+      if(arrayWay[i]=='116в')leftWay(16)
+      if(arrayWay[i]=='117в')rightWay(13)
+      if(arrayWay[i]=='118в')leftWay(16)
+      if(arrayWay[i]=='119в')downWay(8)
 
-    if(arrayWay[i]==102)leftWay(17)
-    if(arrayWay[i]==103)downWay(10)
-    if(arrayWay[i]==104)downWay(10)
-    if(arrayWay[i]==105)downWay(10)
-    if(arrayWay[i]==106)downWay(10)
-    if(arrayWay[i]==107)leftWay(12)
-    if(arrayWay[i]==108)upWay(10)
-    if(arrayWay[i]==109)upWay(10)
+      if(arrayWay[i]==102)leftWay(17)
+      if(arrayWay[i]==103)downWay(10)
+      if(arrayWay[i]==104)downWay(10)
+      if(arrayWay[i]==105)downWay(10)
+      if(arrayWay[i]==106)downWay(10)
+      if(arrayWay[i]==107)leftWay(12)
+      if(arrayWay[i]==108)upWay(10)
+      if(arrayWay[i]==109)upWay(10)
 
-    if(arrayWay[i]==110)downWay(10)
-    if(arrayWay[i]==111)upWay(10)
-    if(arrayWay[i]==112)upWay(10)
-    if(arrayWay[i]==113)downWay(35)
-    if(arrayWay[i]==114)downWay(35)
-    if(arrayWay[i]==115)upWay(10)
-    if(arrayWay[i]==116)downWay(55)
-    if(arrayWay[i]==117)downWay(55)
-    if(arrayWay[i]==118)downWay(10)
-    if(arrayWay[i]==119)upWay(10)
+      if(arrayWay[i]==110)downWay(10)
+      if(arrayWay[i]==111)upWay(10)
+      if(arrayWay[i]==112)upWay(10)
+      if(arrayWay[i]==113)downWay(35)
+      if(arrayWay[i]==114)downWay(35)
+      if(arrayWay[i]==115)upWay(10)
+      if(arrayWay[i]==116)downWay(55)
+      if(arrayWay[i]==117)downWay(55)
+      if(arrayWay[i]==118)downWay(10)
+      if(arrayWay[i]==119)upWay(10)
 
-    if(arrayWay[i]==120)downWay(10)
-    if(arrayWay[i]==121)upWay(10)
-    if(arrayWay[i]==122)downWay(10)
-    if(arrayWay[i]==123)upWay(10)
-    if(arrayWay[i]==124)upWay(17)
-    if(arrayWay[i]==125)upWay(10)
-    if(arrayWay[i]==126)downWay(10)
-    if(arrayWay[i]==127)upWay(10)
-    if(arrayWay[i]==128)downWay(10)
+      if(arrayWay[i]==120)downWay(10)
+      if(arrayWay[i]==121)upWay(10)
+      if(arrayWay[i]==122)downWay(10)
+      if(arrayWay[i]==123)upWay(10)
+      if(arrayWay[i]==124)upWay(17)
+      if(arrayWay[i]==125)upWay(10)
+      if(arrayWay[i]==126)downWay(10)
+      if(arrayWay[i]==127)upWay(10)
+      if(arrayWay[i]==128)downWay(10)
 
-    if(arrayWay[i]==129)upWay(10)
-    if(arrayWay[i]==130)downWay(10)
-    if(arrayWay[i]==131)upWay(10)
-    if(arrayWay[i]==132)downWay(10)
-    if(arrayWay[i]==133)upWay(10)
-    if(arrayWay[i]==134)downWay(10)
-    if(arrayWay[i]==135)upWay(10)
-    if(arrayWay[i]==136)downWay(10)
-    if(arrayWay[i]==137)upWay(10)
-    if(arrayWay[i]==138)downWay(10)
-    if(arrayWay[i]==139){downWay(45)}
-    if(arrayWay[i]==140){downWay(45)}
-    if(arrayWay[i]==141){upWay(10)}
-    //if(arrayWay[i]==142){}
-    if(arrayWay[i]==143){upWay(10)}//1
-    if(arrayWay[i]==144){upWay(10)}
-    if(arrayWay[i]==145){upWay(10)}//2
-    if(arrayWay[i]==146){downWay(45)}
-    if(arrayWay[i]==147){downWay(10)}//1
-    if(arrayWay[i]==148){downWay(10)}
-    if(arrayWay[i]==149){downWay(10)}//2
-    if(arrayWay[i]==150){downWay(10)}
-    if(arrayWay[i]==151){downWay(10)}
-    if(arrayWay[i]==152){downWay(10)}
-    if(arrayWay[i]==153){upWay(20)}
-    if(arrayWay[i]==154){rightWay(14)}
-    if(arrayWay[i]==155){rightWay(14)}
-    if(arrayWay[i]==156){leftWay(14)}
-    if(arrayWay[i]==157){leftWay(31)}
-    if(arrayWay[i]==158){leftWay(31)}
-    if(arrayWay[i]==159){leftWay(31)}
-    if(arrayWay[i]==160){leftWay(31)}
-    if(arrayWay[i]==161){leftWay(31)}
-    if(arrayWay[i]==162){leftWay(31)}
-    if(arrayWay[i]==163){upWay(6)}
-    if(arrayWay[i]==164){upWay(6)}
-    if(arrayWay[i]==165){leftWay(10)}
-    if(arrayWay[i]==166)upWay(13)
-    if(arrayWay[i]==167)upWay(13)
-    if(arrayWay[i]==168)upWay(13)
-    if(arrayWay[i]==169)upWay(13)
-    if(arrayWay[i]==170)upWay(13)
-    if(arrayWay[i]==171)upWay(13)
-    if(arrayWay[i]==172)upWay(13)
+      if(arrayWay[i]==129)upWay(10)
+      if(arrayWay[i]==130)downWay(10)
+      if(arrayWay[i]==131)upWay(10)
+      if(arrayWay[i]==132)downWay(10)
+      if(arrayWay[i]==133)upWay(10)
+      if(arrayWay[i]==134)downWay(10)
+      if(arrayWay[i]==135)upWay(10)
+      if(arrayWay[i]==136)downWay(10)
+      if(arrayWay[i]==137)upWay(10)
+      if(arrayWay[i]==138)downWay(10)
+      if(arrayWay[i]==139){downWay(45)}
+      if(arrayWay[i]==140){downWay(45)}
+      if(arrayWay[i]==141){upWay(10)}
+      //if(arrayWay[i]==142){}
+      if(arrayWay[i]==143){upWay(10)}//1
+      if(arrayWay[i]==144){upWay(10)}
+      if(arrayWay[i]==145){upWay(10)}//2
+      if(arrayWay[i]==146){downWay(45)}
+      if(arrayWay[i]==147){downWay(10)}//1
+      if(arrayWay[i]==148){downWay(10)}
+      if(arrayWay[i]==149){downWay(10)}//2
+      if(arrayWay[i]==150){downWay(10)}
+      if(arrayWay[i]==151){downWay(10)}
+      if(arrayWay[i]==152){downWay(10)}
+      if(arrayWay[i]==153){upWay(20)}
+      if(arrayWay[i]==154){rightWay(14)}
+      if(arrayWay[i]==155){rightWay(14)}
+      if(arrayWay[i]==156){leftWay(14)}
+      if(arrayWay[i]==157){leftWay(31)}
+      if(arrayWay[i]==158){leftWay(31)}
+      if(arrayWay[i]==159){leftWay(31)}
+      if(arrayWay[i]==160){leftWay(31)}
+      if(arrayWay[i]==161){leftWay(31)}
+      if(arrayWay[i]==162){leftWay(31)}
+      if(arrayWay[i]==163){upWay(6)}
+      if(arrayWay[i]==164){upWay(6)}
+      if(arrayWay[i]==165){leftWay(10)}
+      if(arrayWay[i]==166)upWay(13)
+      if(arrayWay[i]==167)upWay(13)
+      if(arrayWay[i]==168)upWay(13)
+      if(arrayWay[i]==169)upWay(13)
+      if(arrayWay[i]==170)upWay(13)
+      if(arrayWay[i]==171)upWay(13)
+      if(arrayWay[i]==172)upWay(13)
 
+    }
+    drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в конце линии
+    way.x=wayFirst.x
+    way.y=wayFirst.y
+    ctx.stroke()
   }
-  drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в конце линии
-  way.x=wayFirst.x
-  way.y=wayFirst.y
-  ctx.stroke()
 }
 
 function restartMap(){
@@ -538,16 +542,24 @@ function restartMap(){
 
 var step=5;
 
+//нажатие на кнопку
+
+document.querySelector('.inputNumButton').onclick=function(){
+  numWay=document.getElementById('inputWay').value
+  document.getElementById('inputWay').value=''
+  searchRoom(numWay)
+}
+
 //нажатие
 document.addEventListener("keydown",pressKey)
 function pressKey(event){
-  if(event.keyCode==space){
+  if(event.keyCode==enterKey){
     numWay=document.getElementById('inputWay').value
     document.getElementById('inputWay').value=''
     searchRoom(numWay)
   }
   if(event.keyCode==downArrowKey){
-    searchRoom(30)
+    // searchRoom(30)
   }
   if(event.keyCode==zKey){
     restartMap()
@@ -752,9 +764,47 @@ backgroundMap.onload=drawMap
 
 
 
+document.querySelector('#orangeCircle').onclick=function(){
+  backgroundMap.src="background/orange.png"
+  document.getElementById('orangeCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
+  document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
+  wayColor="#dd8e72"
 
 
+}
+document.querySelector('#blueCircle').onclick=function(){
+  backgroundMap.src="background/blue.png"
+  document.getElementById('blueCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
+  document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
+  wayColor="#6C87D9"
 
+}
+document.querySelector('#darkCircle').onclick=function(){
+  backgroundMap.src="background/dark.png"
+  document.getElementById('darkCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
+  document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
+  wayColor="#4F5E8C"
+
+}
+var position=0
+window.addEventListener('scroll', function() {
+  if(window.pageYOffset>75 && position==0){
+    document.querySelector('.intro').classList.add('position_fixed_intro')
+    document.querySelector('.map').classList.add('position_fixed_map')
+    position=1
+  }
+  else if(window.pageYOffset<75&&position==1)
+  {
+    document.querySelector('.intro').classList.remove('position_fixed_intro')
+    document.querySelector('.map').classList.remove('position_fixed_map')    
+    position=0
+  }
+
+
+});
 
 
 

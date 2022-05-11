@@ -25,7 +25,12 @@
             </div>
         </div>
     </div>
-
+    <!-- <div class="container">
+        <div class="first">
+            iadjfiajsdfi
+        </div>
+    </div> -->
+    
     <div class="intro">
         <div class="container">
             <div class="intro_inner">
@@ -35,29 +40,51 @@
                     <div>здании КФУ</div>
                 </div>
                 <div class="gif">
-                    <img src="/animate.gif" alt="">
+                    <img src="animate.gif" alt="">
                 </div>
                 
             </div>
         </div>
     </div>
 
-
-
-
-
-
     <div class="map">
-        <div class="container">
+        <div class="containerMap">
             <div class="map_inner">
+                <div class="stringMap">
+                    <div class="inputString">
+                        <div class="inputNum">
+                            <input type="text" class="input" placeholder="Номер аудитории" id="inputWay"></input>
+                        </div>
+
+                        <img src="button3.svg" alt="BUTTON" type="submit" class="inputNumButton"> 
+                    </div>
+                    
+                    <div class="circle_block" >
+                        <div type="submit" id="orangeCircle" class="circle"></div>
+                        <div type="submit" id="blueCircle" class="circle"></div>
+                        <div type="submit" id="darkCircle" class="circle"></div>
+                    </div>
+                </div>
                
+                <!-- <input id="inputWay" type="text" name="quantity" placeholder=""> -->
+                <canvas id="canvasMap" width="1840" height="650" background="black" style="display:block;"></canvas>
+                
             </div>
         </div>
     </div>
 
-    <input id="inputWay" type="text" name="quantity" placeholder="Номер">
-    <canvas id="canvasMap" width="1840" height="650" background="black" style="display:block;"></canvas>
-    <script type="text/javascript" src="script.js"></script>
+   
 
+
+<!-- 
+    <div class="footer">
+        <div class="container">
+            <div class="footer_inner">
+                
+            </div>
+        </div>
+    </div> -->
+
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
