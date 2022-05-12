@@ -143,7 +143,7 @@ body{
 	border: 1.5px solid #48507b;
 	border: 1.5px solid #2d324a;
 	position: relative;
-	z-index: 1;
+	z-index: 10;
 
 }
 

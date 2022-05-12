@@ -27,8 +27,8 @@ var enterKey=13
 
 var toggleWayLine= true
 
-var wayColor='#99b0f6'
 var wayColor='#6C87D9'
+
 
 
 var text={
@@ -46,7 +46,7 @@ var way={
   x:wayFirst.x,
   y:wayFirst.y,
 };
-
+var coordinate=[];
 class Graph {
     constructor() {
       this.vertices = {}; // список смежности графа
@@ -258,75 +258,92 @@ function drawRect(x=way.x,y=way.y,sizeOne=10,sizeTwo=10,color=wayColor){
   ctx.fillStyle=color
   ctx.fillRect(x ,y,sizeOne,sizeTwo)
 }
-function drawSetka(){
-  for(var i=0;i<canvas.width;i+=10)
-  {
-    var yMin=0
-    var yMax=canvas.height
-    drawLine(i,yMin,i,yMax,0.1,'rgb(151, 151, 151)')
 
-    ctx.lineWidth = 1; 
-    ctx.moveTo(i, yMin); 
-    ctx.lineTo(i, yMax); 
-    ctx.strokeStyle = 'rgb(151, 151, 151)';
-    ctx.stroke();
-  }
-  for(var i=0;i<canvas.height;i+=10)
-  {
-    
-    var yMin=0
-    var yMax=canvas.width
-    drawLine(yMin,i,yMax,i,0.1,'rgb(151, 151, 151)')
-
-
-    ctx.lineWidth = 1; 
-    ctx.moveTo(yMin, i); 
-    ctx.lineTo(yMax, i); 
-    ctx.strokeStyle = 'rgb(151, 151, 151)';
-    ctx.stroke();
-  }
-}
 function upWay(sizePx=0){
-  for(var i=way.y-sizePx;i<way.y;way.y--){
-    // drawRect()
-    drawCircle()
+  for(var i=0;i<sizePx;i++){
+    way.y--
+
+    // drawCircle()
+    coordinate.push([way.x,way.y])
+    
   }
 }
 function downWay(sizePx=0){
-  for(var i=way.y+sizePx;i>way.y;way.y++){
-    // drawRect()
-    drawCircle()
+  for(var i=0;i<sizePx;i++){
+    way.y++
+    // drawCircle()
+    coordinate.push([way.x,way.y])
   }
 }
 function rightWay(sizePx=0){
-  for(var i=way.x+sizePx;i>way.x;way.x++){
-    // drawRect()
-    drawCircle()
+  for(var i=0;i<sizePx;i++){
+    way.x++
+    // drawCircle()
+    coordinate.push([way.x,way.y])
   }
 }
 function leftWay(sizePx=0){
-  for(var i=way.x-sizePx;i<way.x;way.x--){
-    // drawRect()
-    drawCircle()
+  for(var i=0;i<sizePx;i++){
+    way.x--
+    // drawCircle()
+    coordinate.push([way.x,way.y])
   }
 }
+
 function addEdgeGraph(start,finish){
   for(var i=start;i<finish;i++)
     graph.addEdge(i,i+1)
 }
+function wayPlay(){
 
+  
+  var i=0
+  var timer=setInterval(function(){
+    if(!coordinate.length){
+      clearInterval(timer)
+      return;
+    }
+    if(i==coordinate.length)
+    {
+      drawRect(coordinate[coordinate.length-1][0]-5,coordinate[coordinate.length-1][1]-5,10,10,wayColor)
+      clearInterval(timer)
+      console.log('f')
+      
+      return;
+      
+    }
+
+    for(var j=0;j<20;j++){
+      if(i!=coordinate.length){
+        drawCircle(coordinate[i][0],coordinate[i][1])
+        i++
+      }
+      else break
+    }
+   
+    
+
+    ctx.stroke()   
+    
+    
+  },10)
+  
+  
+  
+}
 function searchRoom(finalNum){
   
-
-  if(finalNum>=101){
+  if(finalNum>=101|| typeof finalNum === 'string' || finalNum instanceof String ){
+    coordinate.length=0
     canvasClear()
     drawMap()
     drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
     let arrayWay=new Array()
     arrayWay=graph.findShortestPath(0, finalNum)
-    console.log(arrayWay)
     for(var i=0;i<arrayWay.length;i++){
-      if(arrayWay[i]==1)upWay(93)
+      if(arrayWay[i]==1){
+        upWay(93)
+      }
       if(arrayWay[i]==2)rightWay(75)
       if(arrayWay[i]==3)rightWay(8)
       if(arrayWay[i]==4)rightWay(44)
@@ -521,8 +538,9 @@ function searchRoom(finalNum){
       if(arrayWay[i]==171)upWay(13)
       if(arrayWay[i]==172)upWay(13)
 
+
     }
-    drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в конце линии
+    wayPlay()
     way.x=wayFirst.x
     way.y=wayFirst.y
     ctx.stroke()
@@ -611,9 +629,6 @@ function pressKey(event){
   }
   
 } 
-
-
-
 let graph = new Graph();
 //создание вершин с 0 до 75
 for(var i=0;i<=75;i++){
