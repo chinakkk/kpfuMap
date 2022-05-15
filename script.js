@@ -5,6 +5,7 @@ const ctx=canvas.getContext("2d")
 const backgroundMap=new Image();
 backgroundMap.src="background/dark.png"
 backgroundMap.src="background/blue.png"
+
 // backgroundMap.src="/background/orange.png"
 
 
@@ -781,16 +782,17 @@ backgroundMap.onload=drawMap
 
 document.querySelector('#orangeCircle').onclick=function(){
   backgroundMap.src="background/orange.png"
-  document.getElementById('orangeCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('orangeCircle').style.border="0.3vh solid rgb(255, 255, 255)"
   document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#dd8e72"
 
 
+
 }
 document.querySelector('#blueCircle').onclick=function(){
   backgroundMap.src="background/blue.png"
-  document.getElementById('blueCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('blueCircle').style.border="0.3vh solid rgb(255, 255, 255)"
   document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#6C87D9"
@@ -798,7 +800,7 @@ document.querySelector('#blueCircle').onclick=function(){
 }
 document.querySelector('#darkCircle').onclick=function(){
   backgroundMap.src="background/dark.png"
-  document.getElementById('darkCircle').style.border="2px solid rgb(255, 255, 255)"
+  document.getElementById('darkCircle').style.border="0.3vh solid rgb(255, 255, 255)"
   document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#4F5E8C"

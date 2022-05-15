@@ -6,7 +6,6 @@ body{
 
     /* background-image: url(/background1.jpg); */
     /* background-image: url(/background.jpg); */
-    zoom: 75%;
 	
     margin: 0;
 	font-family: Arial;
@@ -46,18 +45,18 @@ body{
 
 
 .header_inner{
-    height: 100px;
 	display: flex; /*Расставить элементы селектора в строку*/
 	justify-content: space-between; /*Промежуток между элементами хз там ес че*/
 	align-items: center;/*Все элементы в центре*/
-
+	/* height: 8vh; */
+	height: 75px;
 }
 
 
 .header_logo{
     font-weight: 700;
-    font-size: 25px;
-    padding-left: 8px;
+    font-size: 2.5vh;
+    padding-left: 0.1vh;
     color: white;
     opacity: .85;
     display: flex;
@@ -67,10 +66,11 @@ body{
 }
 #kpfu{
     font-weight: 550;
+	padding-left: 1vh;
 }
 
 .nav{
-	font-size: 18px;
+	font-size: 1.8vh;
 	font-weight: 700;
 	text-transform: uppercase;/*Увеличивает буквы из а в А*/
 	display: flex;
@@ -78,7 +78,7 @@ body{
 
 
 .nav_link{
-	margin-left: 50px;
+	margin-left: 7vh;
 	text-decoration: none;/*Убираем линию под текстом*/
 	opacity: .85;
 	transition: opacity .2s linear;/*Трансформация, с каким объектом работаем*/
@@ -100,7 +100,7 @@ body{
 	
 }
 .position_fixed_map{
-	margin-top: 73vh;
+	margin-top: 76vh;
 }
 
 
@@ -108,7 +108,7 @@ body{
 .intro{
 	top:0;
 	color: #fff;
-	height: 73vh;
+	height: 76vh;
 	background: #2d324a;
 	
 	width: 100%;
@@ -118,13 +118,14 @@ body{
 .intro_inner{
     font-family: 'Raleway', sans-serif;
     font-size: 100px;
+    font-size: 8vh;
     font-weight: 800;
 	
     display: flex;
     justify-content: space-between;
 	align-items: center;
 
-	padding-top: 200px;
+	padding-top: 20vh;
 }
 .gif{
     margin-right: 0px;
@@ -136,7 +137,7 @@ body{
 
 .map{
 	color: #fff;
-	min-height: 91vh;
+	height: 93vh;
 	background: #48507b;
 	background: #2d324a;
 	max-width: 100%;
@@ -151,12 +152,14 @@ body{
 	
     display: block;
 	margin: 0 auto;
-	padding-top: 100px;
-	padding-bottom: 70px;
+	padding-top: 6vh;
+	padding-bottom: 7vh;
 	border: 0px solid ;
-	border-radius: 20px;
+	border-radius: 4vh;
 	width: 97%;
-	background-image:url(background1.jpg)
+	height: 100%;
+	background-image:url(background1.jpg);
+	background-size: 300vh;
 
 }
 #buttonOrange{
@@ -183,13 +186,13 @@ body{
 
 }
 .inputNumButton{
-	margin-left: 40px;
+	margin-left: 4vh;
 }
 .input{
-	margin-left: 20px;
+	margin-left: 2vw;
 	font-family: 'Raleway', sans-serif;
-    font-size: 40px;
-	width: 460px;
+    font-size: 4vh;
+	width: 25vw;
     font-weight: 300;
 	background:none;
 	border:none;
@@ -203,26 +206,25 @@ body{
 .inputNum{
 	display: flex;
 	font-family: 'Raleway', sans-serif;
-    font-size: 40px;
+    font-size: 7vh;
     font-weight: 300;
-	padding-bottom: 5px;
-	border-bottom: 2px solid #ffffff;
+	padding-bottom: 1vh;
+	border-bottom: 0.2vh solid #ffffff;
+	margin-left: 5.2vh;
 
 }
 .circle_block{
 
 	display: flex;
 	max-height: 100%;
-
-
-	margin-right: 10px;
+	margin-right: 6vh;
 }
 .circle{
-	width: 35px;
-	height: 35px;
+	width: 4vh;
+	height: 4vh;
 	border: 0px solid rgb(255, 255, 255);
-	border-radius: 50px;
-	margin-left: 25px;
+	border-radius: 10vh;
+	margin-left: 3.5vh;
 
 }
 #orangeCircle{
@@ -231,7 +233,7 @@ body{
 }
 #blueCircle{
 	background-color:rgb(66, 131, 237);
-	border: 2px solid rgb(255, 255, 255);
+	border: 0.3vh solid rgb(255, 255, 255);
 }
 #darkCircle{
 	background-color:#1b274b;
@@ -255,7 +257,7 @@ body{
 canvas{
     display: block;
 	margin: 0 auto;
-    
+	height: 55vh;
 }
 input{
     display: block;
