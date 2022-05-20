@@ -808,7 +808,7 @@ document.querySelector('#darkCircle').onclick=function(){
 }
 var position=0
 window.addEventListener('scroll', function() {
-  if(window.pageYOffset>75 && position==0){
+  if(window.pageYOffset>=75 && position==0){
     document.querySelector('.intro').classList.add('position_fixed_intro')
     document.querySelector('.map').classList.add('position_fixed_map')
     position=1
