@@ -1,20 +1,101 @@
 const canvas=document.getElementById("canvasMap")
 const ctx=canvas.getContext("2d")
 
+var admin=false;
 
 const backgroundMap=new Image();
 backgroundMap.src="background/dark.png"
 backgroundMap.src="background/blue.png"
-
 // backgroundMap.src="/background/orange.png"
-
 
 var numWay=0;//номер который вводит пользователь в строку
 var space=32;//пробел
 var zKey=90;
+
+
+var officeName=new Array();
+var officeName=[
+  {
+    name:'буфет',
+    number:129
+  },
+  {
+    name:'управление кадров',
+    number:130
+  },
+  {
+    name:'департамент бухгалтерского учета',
+    number:131
+  },
+  {
+    name:'приемная проректора по финансовой деятельности',
+    number:137
+  },
+  {
+    name:'отдел сопроваждения выплат работникам',
+    number:139
+  },
+  {
+    name:'отдел бюджетирования',
+    number:146
+  },
+  {
+    name:'деканат юридического факультета',
+    number:158
+  },
+  {
+    name:'юридическое управление',
+    number:160
+  },
+  {
+    name:'кафедра квантовой электронники и радиоспектроскопии',
+    number:167
+  },
+  {
+    name:'профком сотрудников',
+    number:129
+  },
+  {
+    name:'почта',
+    number:122
+  },
+  {
+    name:'департамент образования',
+    number:123
+  },
+  {
+    name:'деканат',
+    number:119
+  },
+  {
+    name:'отдел учета материальных ценностей',
+    number:'108в'
+  },
+  {
+    name:'отдел аттестации научно педагогических кадров',
+    number:105
+  },
+  {
+    name:'туалет',
+    number:102
+  },
+  {
+    name:'кафедра биохимии',
+    number:'117в'
+  },
+  {
+    name:'заведующий кафедрой биохимии',
+    number:'102в'
+  }
+]
+
+
+
+
 // var leftArrow=37;
 // var upArrow=38;
 // var rightArrow=39;
+
 var downArrowKey=40;
 var iKey=73;
 var jKey=74;
@@ -26,6 +107,7 @@ var pKey=80
 var rightArrowKey=39
 var enterKey=13
 
+var step=5;
 var toggleWayLine= true
 
 var wayColor='#6C87D9'
@@ -52,18 +134,15 @@ class Graph {
     constructor() {
       this.vertices = {}; // список смежности графа
     }
-    
     addVertex(value) {
       if (!this.vertices[value]) {
         this.vertices[value] = [];
       }
     }
-    
     addEdge(vertex1, vertex2) {
       if (!(vertex1 in this.vertices) || !(vertex2 in this.vertices)) {
         throw new Error('В графе нет таких вершин');
       }
-  
       if (!this.vertices[vertex1].includes(vertex2)) {
         this.vertices[vertex1].push(vertex2);
       }
@@ -71,93 +150,8 @@ class Graph {
         this.vertices[vertex2].push(vertex1);
       }
     }
-
-
     // 
-
-
-    dfs(startVertex, callback) {
-        let list = this.vertices; // список смежности
-        let stack = [startVertex]; // стек вершин для перебора
-        let visited = { [startVertex]: 1 }; // посещенные вершины
-        
-        function handleVertex(vertex) {
-          // вызываем коллбэк для посещенной вершины
-          callback(vertex);
-          
-          // получаем список смежных вершин
-          let reversedNeighboursList = [...list[vertex]].reverse();
-         
-          reversedNeighboursList.forEach(neighbour => {
-            if (!visited[neighbour]) {
-              // отмечаем вершину как посещенную
-              visited[neighbour] = 1;
-              // добавляем в стек
-              stack.push(neighbour);
-            }
-          });
-        }
-        
-        // перебираем вершины из стека, пока он не опустеет
-        while(stack.length) {
-          let activeVertex = stack.pop();
-          handleVertex(activeVertex);
-        }
-        
-        // проверка на изолированные фрагменты
-        stack = Object.keys(this.vertices);
-    
-        while(stack.length) {
-          let activeVertex = stack.pop();
-          if (!visited[activeVertex]) {
-            visited[activeVertex] = 1;
-            handleVertex(activeVertex);
-          }
-        }
-      }
-
     //   
-
-    bfs(startVertex, callback) {
-        let list = this.vertices; // список смежности
-        let queue = [startVertex]; // очередь вершин для перебора
-        let visited = { [startVertex]: 1 }; // посещенные вершины
-        
-        function handleVertex(vertex) {
-          // вызываем коллбэк для посещенной вершины
-          callback(vertex);
-          
-          // получаем список смежных вершин
-          let neighboursList = list[vertex];
-          
-          neighboursList.forEach(neighbour => {
-            if (!visited[neighbour]) {
-              visited[neighbour] = 1;
-              queue.push(neighbour);
-            }
-          });
-        }
-            
-        // перебираем вершины из очереди, пока она не опустеет
-        while(queue.length) {
-          let activeVertex = queue.shift();
-          handleVertex(activeVertex);
-        }
-        
-        queue = Object.keys(this.vertices);
-    
-        // Повторяем цикл для незатронутых вершин
-        while(queue.length) {
-          let activeVertex = queue.shift();
-          if (!visited[activeVertex]) {
-            visited[activeVertex] = 1;
-            handleVertex(activeVertex);
-            }
-        }
-    }
-
-    //   
-
     bfs2(startVertex) {
         let list = this.vertices; 
         let queue = [startVertex];
@@ -182,24 +176,19 @@ class Graph {
             }
           });
         }
-    
         // перебираем вершины из очереди, пока она не опустеет
         while(queue.length) {
           let activeVertex = queue.shift();
           handleVertex(activeVertex);
         }
-        
         return { distance, previous }
     }
-
     //   
-
-
     findShortestPath(startVertex, finishVertex) {
         let result = this.bfs2(startVertex);
     
         if (!(finishVertex in result.previous)) 
-            throw new Error(`Нет пути из вершины ${startVertex} в вершину ${finishVertex}`);
+            throw new Error(`Аудитории ${finishVertex} не существует, либо находится не на певом этаже`);
             
         let path = [];
         
@@ -209,18 +198,12 @@ class Graph {
           path.unshift(currentVertex);
           currentVertex = result.previous[currentVertex];
         }
-        
         path.unshift(startVertex);
         
         return path;
     }
-
     //   
-
-
 }
-
-
 //прорисовка заднего фона
 function drawBackground(sizeOne=canvas.height,sizeTwo=canvas.width){
     ctx.fillStyle="rgb(192, 248, 229)";
@@ -239,14 +222,7 @@ function drawText(text,x,y,color="black"){
     ctx.font="10px Arial";
     ctx.fillText(text,x,y);
 }
-//шаблон для линии
-function drawLine(xOne,yOne,xTwo,yTwo,width=0.1,color=wayColor){
-    ctx.lineWidth = width; 
-    ctx.moveTo(xOne, yOne); 
-    ctx.lineTo(xTwo, yTwo); 
-    ctx.strokeStyle = color;
-    ctx.stroke();
-}
+
 function drawCircle(x=way.x,y=way.y,radius=4,start=0,finish=pi*2,watch=true,color=wayColor){
   if(!toggleWayLine){
     canvasClear()
@@ -259,7 +235,6 @@ function drawRect(x=way.x,y=way.y,sizeOne=10,sizeTwo=10,color=wayColor){
   ctx.fillStyle=color
   ctx.fillRect(x ,y,sizeOne,sizeTwo)
 }
-
 function upWay(sizePx=0){
   for(var i=0;i<sizePx;i++){
     way.y--
@@ -279,7 +254,6 @@ function downWay(sizePx=0){
 function rightWay(sizePx=0){
   for(var i=0;i<sizePx;i++){
     way.x++
-    // drawCircle()
     coordinate.push([way.x,way.y])
   }
 }
@@ -290,14 +264,11 @@ function leftWay(sizePx=0){
     coordinate.push([way.x,way.y])
   }
 }
-
 function addEdgeGraph(start,finish){
   for(var i=start;i<finish;i++)
     graph.addEdge(i,i+1)
 }
 function wayPlay(){
-
-  
   var i=0
   var timer=setInterval(function(){
     if(!coordinate.length){
@@ -308,12 +279,8 @@ function wayPlay(){
     {
       drawRect(coordinate[coordinate.length-1][0]-5,coordinate[coordinate.length-1][1]-5,10,10,wayColor)
       clearInterval(timer)
-      console.log('f')
-      
       return;
-      
     }
-
     for(var j=0;j<20;j++){
       if(i!=coordinate.length){
         drawCircle(coordinate[i][0],coordinate[i][1])
@@ -321,16 +288,8 @@ function wayPlay(){
       }
       else break
     }
-   
-    
-
-    ctx.stroke()   
-    
-    
+    ctx.stroke()     
   },10)
-  
-  
-  
 }
 function searchRoom(finalNum){
   
@@ -338,13 +297,21 @@ function searchRoom(finalNum){
     coordinate.length=0
     canvasClear()
     drawMap()
-    drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
+
+    if(finalNum<99) finalNum='-1';
+    //поиск аудиторий по названию
+    finalNum=finalNum.toLowerCase()
+    for(var i=0;i<officeName.length;i++){
+      if(finalNum==officeName[i].name) finalNum=officeName[i].number;
+    }
     let arrayWay=new Array()
     arrayWay=graph.findShortestPath(0, finalNum)
+    if(arrayWay){
+      drawRect(way.x-5 ,way.y-5,10,10,wayColor)//квадрат в начале линии
+    }
     for(var i=0;i<arrayWay.length;i++){
-      if(arrayWay[i]==1){
-        upWay(93)
-      }
+      if(arrayWay[i]==1) upWay(93)
+      
       if(arrayWay[i]==2)rightWay(75)
       if(arrayWay[i]==3)rightWay(8)
       if(arrayWay[i]==4)rightWay(44)
@@ -547,7 +514,6 @@ function searchRoom(finalNum){
     ctx.stroke()
   }
 }
-
 function restartMap(){
   canvasClear()
   drawMap()
@@ -559,17 +525,16 @@ function restartMap(){
 
 }
 
-var step=5;
-
 //нажатие на кнопку
 
 document.querySelector('.inputNumButton').onclick=function(){
   numWay=document.getElementById('inputWay').value
+  console.log(numWay)
   document.getElementById('inputWay').value=''
   searchRoom(numWay)
 }
 
-//нажатие
+//нажатие enter
 document.addEventListener("keydown",pressKey)
 function pressKey(event){
   if(event.keyCode==enterKey){
@@ -577,57 +542,63 @@ function pressKey(event){
     document.getElementById('inputWay').value=''
     searchRoom(numWay)
   }
-  if(event.keyCode==downArrowKey){
-    // searchRoom(30)
-  }
-  if(event.keyCode==zKey){
-    restartMap()
-  }
-  if(event.keyCode==iKey){
-    upWay(step)
-    text.y+=step
-    console.log("Y="+text.y)
-    ctx.stroke()
-  }
-  if(event.keyCode==kKey){
-    downWay(step)
-    text.y-=step
-    console.log("Y="+text.y)
-    ctx.stroke()
-  }
-  if(event.keyCode==jKey){
-    leftWay(step)
-    text.x-=step
-    console.log("X="+text.x)
-    ctx.stroke()
-  }
-  if(event.keyCode==lKey){
-    rightWay(step)
-    text.x+=step
-    console.log("X="+text.x)
-    ctx.stroke()
-  }
-  if(event.keyCode==upStep){
-    step--
-    console.log("шаг "+step)
-  }
-  if(event.keyCode==downStep){
-    step++
-    console.log("шаг "+step)
-  }
-  if(event.keyCode==pKey){
-    text.x=0
-    text.y=0
-    
-    canvasClear()
-    drawMap()
-    drawCircle()
-  }
-  if(event.keyCode==rightArrowKey){
-    if(toggleWayLine)toggleWayLine=false
-    else toggleWayLine=true
 
+  //создание нового графа
+  if(admin){
+    if(event.keyCode==downArrowKey){
+      // searchRoom(30)
+    }
+    if(event.keyCode==zKey){
+      restartMap()
+    }
+    if(event.keyCode==iKey){
+      upWay(step)
+      text.y+=step
+      console.log("Y="+text.y)
+      ctx.stroke()
+    }
+    if(event.keyCode==kKey){
+      downWay(step)
+      text.y-=step
+      console.log("Y="+text.y)
+      ctx.stroke()
+    }
+    if(event.keyCode==jKey){
+      leftWay(step)
+      text.x-=step
+      console.log("X="+text.x)
+      ctx.stroke()
+    }
+    if(event.keyCode==lKey){
+      rightWay(step)
+      text.x+=step
+      console.log("X="+text.x)
+      ctx.stroke()
+    }
+    if(event.keyCode==upStep){
+      step--
+      console.log("шаг "+step)
+    }
+    if(event.keyCode==downStep){
+      step++
+      console.log("шаг "+step)
+    }
+    if(event.keyCode==pKey){
+      text.x=0
+      text.y=0
+      
+      canvasClear()
+      drawMap()
+      drawCircle()
+    }
+    if(event.keyCode==rightArrowKey){
+      if(toggleWayLine)toggleWayLine=false
+      else toggleWayLine=true
+      console.log('toggleWay is '+ toggleWayLine)
+  
+    }
   }
+  
   
 } 
 let graph = new Graph();
@@ -782,7 +753,7 @@ backgroundMap.onload=drawMap
 
 document.querySelector('#orangeCircle').onclick=function(){
   backgroundMap.src="background/orange.png"
-  document.getElementById('orangeCircle').style.border="0.3vh solid rgb(255, 255, 255)"
+  document.getElementById('orangeCircle').style.border="0.15vw solid rgb(255, 255, 255)"
   document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#dd8e72"
@@ -792,7 +763,7 @@ document.querySelector('#orangeCircle').onclick=function(){
 }
 document.querySelector('#blueCircle').onclick=function(){
   backgroundMap.src="background/blue.png"
-  document.getElementById('blueCircle').style.border="0.3vh solid rgb(255, 255, 255)"
+  document.getElementById('blueCircle').style.border="0.15vw solid rgb(255, 255, 255)"
   document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('darkCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#6C87D9"
@@ -800,20 +771,21 @@ document.querySelector('#blueCircle').onclick=function(){
 }
 document.querySelector('#darkCircle').onclick=function(){
   backgroundMap.src="background/dark.png"
-  document.getElementById('darkCircle').style.border="0.3vh solid rgb(255, 255, 255)"
+  document.getElementById('darkCircle').style.border="0.15vw solid rgb(255, 255, 255)"
   document.getElementById('orangeCircle').style.border="0px solid rgb(255, 255, 255)"
   document.getElementById('blueCircle').style.border="0px solid rgb(255, 255, 255)"
   wayColor="#4F5E8C"
 
 }
+
 var position=0
 window.addEventListener('scroll', function() {
-  if(window.pageYOffset>=75 && position==0){
+  if(window.pageYOffset>=60 && position==0){
     document.querySelector('.intro').classList.add('position_fixed_intro')
     document.querySelector('.map').classList.add('position_fixed_map')
     position=1
   }
-  else if(window.pageYOffset<75&&position==1)
+  else if(window.pageYOffset<60&&position==1)
   {
     document.querySelector('.intro').classList.remove('position_fixed_intro')
     document.querySelector('.map').classList.remove('position_fixed_map')    
